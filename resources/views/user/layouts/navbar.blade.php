@@ -18,7 +18,7 @@
                         <a class="nav-link" href="{{ route('home') }}">{{translate('messages.home')}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('about-us') }}">{{translate('messages.about')}}</a>
+                        <a class="nav-link" href="#about_us_Section">{{translate('messages.about')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">{{translate('messages.contact_us')}}</a>
@@ -28,9 +28,12 @@
                         <a class="nav-link" href="{{ route('sign-up') }}">{{translate('messages.signup')}}</a>
                     </li>
                     @endif
+                    @if (auth()->check())
                     <li class="nav-item">
-                        <a class="nav-link" href="doctors.html">Doctors</a>
+                        <a class="nav-link text-danger font-weight-bold" href="doctors.html">{{translate('messages.log_out')}}</a>
                     </li>
+                    @endif
+                    
                 </ul>
             </div>
         </nav>

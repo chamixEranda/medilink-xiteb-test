@@ -17,13 +17,13 @@
               <a href="">
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 <span>
-                  Call +01 1234567890
+                  Call +94117845963
                 </span>
               </a>
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  demo@gmail.com
+                  medilink@gmail.com
                 </span>
               </a>
             </div>
@@ -49,7 +49,9 @@
               About
             </h4>
             <p>
-              Beatae provident nobis mollitia magnam voluptatum, unde dicta facilis minima veniam corporis laudantium alias tenetur eveniet illum reprehenderit fugit a delectus officiis blanditiis ea.
+              MediLink is a revolutionary platform designed to streamline prescription management for 
+              both patients and pharmacies. We believe everyone deserves a secure, convenient, and 
+              efficient way to handle their medications.
             </p>
           </div>
         </div>
@@ -91,12 +93,8 @@
       </div>
       <div class="footer-info">
         <p>
-          &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">Free Html Templates<br><br></a>
-            &copy; <span id="displayYear"></span> Distributed By
-            <a href="https://themewagon.com/">ThemeWagon</a>
+          &copy; <span id="displayYear"></span> All Rights Reserved
         </p>
-       
       </div>  
     </div>
 </footer>
