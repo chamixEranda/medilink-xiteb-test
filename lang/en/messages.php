@@ -10,4 +10,8 @@
   'sign_up_now' => 'Sign up now',
   'otp_not_matched' => 'Otp not matched',
   'email_varified_successfully' => 'Email varified successfully',
+  'login' => 'Login',
+  'sign_up_here' => 'Sign up here',
+  'invalid_credentials' => 'Invalid credentials',
+  'you_are_logged_in' => 'You are logged in',
 );

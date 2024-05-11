@@ -46,6 +46,14 @@
                                             <input type="number" class="form-control" name="contact_no" id="contact_no" required>
                                         </div>
                                         <div class="col-12 my-2">
+                                            <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                                            <input type="password" class="form-control" name="password" id="password" required>
+                                        </div>
+                                        <div class="col-12 my-2">
+                                            <label for="password" class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                                            <input type="password" class="form-control" name="confirm_password" id="confirm_password" required>
+                                        </div>
+                                        <div class="col-12 my-2">
                                             <label for="dob" class="form-label">DOB <span class="text-danger">*</span></label>
                                             <input type="date" class="form-control" name="dob" id="dob" required>
                                         </div>

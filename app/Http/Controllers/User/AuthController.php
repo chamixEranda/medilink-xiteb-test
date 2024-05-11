@@ -12,9 +12,16 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\EmailVerificationMail;
 use App\Http\CentralLogics\Helpers;
 use Illuminate\Support\Facades\Auth;
+use App\Services\UserService;
 
 class AuthController extends Controller
 {
+    protected $userService;
+
+    public function __construct(UserService $userService) {
+        $this->userService = $userService;
+    }
+
     public function registerUser()
     {
         return view('user.register');
@@ -115,6 +122,8 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users',
+            'password'          => 'required|min:6|max:20',
+            'confirm_password'  => 'required|min:6|max:20|same:password',
             'contact_no' => 'required',
             'dob' => 'required',
             'address' => 'required',
@@ -129,7 +138,7 @@ class AuthController extends Controller
             ],400);
         }
 
-        $userEmail = User::where('email', $request['email'])->first();
+        $userEmail = $this->userService->getUserByEmail($request['email']);
         if (isset($userEmail)) 
         {
             return response()->json([
@@ -139,14 +148,11 @@ class AuthController extends Controller
 
         DB::beginTransaction();
 
-        $user = User::create([
-            'name' => $request->name,
-            'contact' => $request->contact_no,
-            'email' => $request->email,
-            'dob' => $request->dob,
-            'address' => $request->address,
-            'email_verified_at' => now(),
-        ]);
+        $data = $request->all();
+        $data['password'] = bcrypt($request->password);
+        $data['contact'] = $request->contact_no;
+        $data['email_verified_at'] = now();
+        $user = $this->userService->createUser($data);
 
         DB::commit();
 
@@ -156,5 +162,31 @@ class AuthController extends Controller
             ], 200);
         }
             
+    }
+
+    public function loginCheck(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email'     => 'required|email|exists:users,email',
+            'password'  => 'required|min:8|max:20',
+        ]);
+        
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => Helpers::error_processor($validator)
+            ],400);
+        }
+
+        $user = $this->userService->getUserByEmail($request['email']);
+        if ($user) {
+            $creds = $request->only('email','password');
+            if (Auth::guard('web')->attempt($creds) ) {
+                return response()->json(['message' => translate('messages.you_are_logged_in')],200);
+
+            }else {
+                return response()->json(['message' => translate('messages.invalid_credentials')],401);
+            }
+        }else
+            return response()->json(['message' => translate('messages.user_not_found')],401);
     }
 }

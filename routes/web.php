@@ -25,7 +25,5 @@ Route::post('/signup/verify-email', [AuthController::class, 'verifySignupEmail']
 Route::post('/signup/verify-email-otp', [AuthController::class, 'verifySignupEmailOtp'])->name('sign-up.verify-email-otp');
 Route::post('/signup/store', [AuthController::class, 'registerStore'])->name('sign-up.store');
 
-Route::get('/test-email', function () {
-    Mail::to('chamitheranda00@gmail.com')->send(new EmailVerificationMail);
-});
+Route::post('/login/check', [AuthController::class, 'loginCheck'])->name('login.check');
 

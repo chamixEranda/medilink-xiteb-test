@@ -1,7 +1,6 @@
 @extends('user.layouts.app')
 
 @section('content')
-<!-- Login 5 - Bootstrap Brain Component -->
 <section class="p-3 p-md-4 p-xl-5">
     <div class="container">
         <div class="card border-light-subtle shadow-sm">
@@ -16,26 +15,31 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="mb-5">
-                                    <h3>Login</h3>
+                                    <h3>{{ translate('messages.login') }}</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="signup-form-section">
-                            <form action="#!">
+                            <form id="user_login_form" method="POST" autocomplete="off">
+                                @csrf
                                 <div class="row gy-3 gy-md-4 overflow-hidden">
-                                    
                                     <div class="col-12 my-2">
                                         <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
                                         <input type="email" class="form-control" name="email" id="email" required>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 my-2">
+                                        <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                                        <input type="password" class="form-control" name="password" id="password" required>
+                                    </div>
+                                    <div class="col-12 mt-4">
                                         <div class="d-grid">
-                                            <button class="btn bsb-btn-xl" type="submit">Send OTP</button>
+                                            <button class="btn bsb-btn-xl" type="submit">
+                                                <img class="btn-preloader-login" src="{{ asset('images/preloader.gif') }}" style="width: 25px;height:25px;margin-left:auto;margin-right:auto;display:none">{{ translate('messages.login') }}</button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row d-flex justify-content-center mt-4">
-                                    <p>New to MediLink? <a href="{{ route('sign-up') }}" class="text-success">Sign Up Here</a></p>
+                                    <p>New to MediLink? <a href="{{ route('sign-up') }}" class="text-success">{{ translate('messages.sign_up_here') }}</a></p>
                                 </div>
                             </form>
                         </div>

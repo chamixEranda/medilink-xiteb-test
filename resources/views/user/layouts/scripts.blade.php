@@ -238,6 +238,9 @@ function signup_otp_verify(){
 function registerWithEmail(){
     var formData = new FormData($('.form_email_register')[0]);
     var contact = formData.get("contact_no");
+    var password = formData.get("password");
+    var confirmPassword = formData.get("confirm_password");
+
     var phoneNumberPattern = /^0[0-9]{9}$/;
     if (phoneNumberPattern.test(contact)) {
         $('.btn-preloader-register').show();
@@ -247,6 +250,26 @@ function registerWithEmail(){
             animation: true,
             icon: 'warning',
             title: 'Contact no should contain 10 digits'
+        });
+        return;
+    }
+
+    if (password.length < 8) {
+        $('.btn-preloader-register').hide();
+        ToastMixin.fire({
+            animation: true,
+            icon: 'warning',
+            title: 'Password shoul have more than 8 characters'
+        });
+        return;
+    }
+
+    if (password != confirmPassword) {
+        $('.btn-preloader-register').hide();
+        ToastMixin.fire({
+            animation: true,
+            icon: 'warning',
+            title: 'Confirm password shoul be same as password'
         });
         return;
     }
@@ -296,5 +319,88 @@ function registerWithEmail(){
         }
     })
 }
+
+$('#user_login_form').on('submit', function(e){
+    e.preventDefault();
+    $('.btn-preloader-login').show();
+    var formData = new FormData($('#user_login_form')[0]);
+    var email = formData.get("email");
+    var password = formData.get("password");
+    var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
+
+    if (email.length == 0) {
+        ToastMixin.fire({
+            animation: true,
+            icon: 'warning',
+            title: "Please enter your email!"
+        });
+        $('.btn-preloader-login').hide();
+        return;
+    }
+    if (!email.match(pattern)) {
+        ToastMixin.fire({
+            animation: true,
+            icon: 'warning',
+            title: "Please enter valid email!"
+        });
+        $('.btn-preloader-login').hide();
+        return;
+    }
+
+    if (password.length < 8) {
+        $('.btn-preloader-login').hide();
+        ToastMixin.fire({
+            animation: true,
+            icon: 'warning',
+            title: 'Password shoul have more than 8 characters'
+        });
+        return;
+    }
+
+    $.ajax({
+        headers:
+        {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        url: '{{ route('login.check') }}',
+        data:formData,
+        cache:false,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            $('.btn-preloader-login').hide();
+            ToastMixin.fire({
+                animation: true,
+                icon: 'success',
+                title: response.message
+            });
+            location.replace('{{ route('home') }}');
+        },
+        error: function(xhr, status, error) {
+            $('.btn-preloader-login').hide();
+            if (xhr.status == 400) {
+                var errors = xhr.responseJSON.errors;
+                var errorMessage = "Validation Error:\n";
+                for (var key in errors) {
+                    errorMessage += "- " + errors[key].message + "\n";
+                }
+                ToastMixin.fire({
+                    animation: true,
+                    icon: 'warning',
+                    title: errorMessage
+                });
+            } 
+            else if(xhr.status == 401) {
+                var errorMessage = xhr.responseJSON.message;
+                ToastMixin.fire({
+                    animation: true,
+                    icon: 'warning',
+                    title: errorMessage
+                });
+            }
+        }
+    })
+});
 
 </script>
