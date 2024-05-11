@@ -19,7 +19,7 @@
                                         We Provide Best Healthcare
                                     </h1>
                                     <p>
-                                        Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis delectus repellat modi impedit sequi.
+                                        Take control of your healthcare. Streamline your prescription management with secure, convenient access from anywhere.
                                     </p>
                                     <div class="btn-box">
                                         <a href="" class="btn1 w-50">

@@ -2,9 +2,9 @@
 <header class="header_section">
     <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{{ route('home') }}">
                 <span>
-                    Orthoc
+                    {{ env('APP_NAME') }}
                 </span>
             </a>
 
@@ -15,20 +15,25 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('home') }}">Home</a>
+                        <a class="nav-link" href="{{ route('home') }}">{{translate('messages.home')}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('about-us') }}">About</a>
+                        <a class="nav-link" href="#about_us_Section">{{translate('messages.about')}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact Us</a>
+                        <a class="nav-link" href="contact.html">{{translate('messages.contact_us')}}</a>
                     </li>
+                    @if (!auth()->check())
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('sign-up') }}">Signup</a>
+                        <a class="nav-link" href="{{ route('sign-up') }}">{{translate('messages.signup')}}</a>
                     </li>
+                    @endif
+                    @if (auth()->check())
                     <li class="nav-item">
-                        <a class="nav-link" href="doctors.html">Doctors</a>
+                        <a class="nav-link text-danger font-weight-bold" href="doctors.html">{{translate('messages.log_out')}}</a>
                     </li>
+                    @endif
+                    
                 </ul>
             </div>
         </nav>

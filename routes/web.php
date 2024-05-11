@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\AuthController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,10 +17,12 @@ use App\Http\Controllers\User\AuthController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('about-us');
 Route::get('/sign-up', [AuthController::class, 'registerUser'])->name('sign-up');
 Route::get('/login', [AuthController::class, 'loginUser'])->name('login');
 
 Route::post('/signup/verify-email', [AuthController::class, 'verifySignupEmail'])->name('sign-up.verify-email');
+Route::post('/signup/verify-email-otp', [AuthController::class, 'verifySignupEmailOtp'])->name('sign-up.verify-email-otp');
 Route::post('/signup/store', [AuthController::class, 'registerStore'])->name('sign-up.store');
+
+Route::post('/login/check', [AuthController::class, 'loginCheck'])->name('login.check');
 

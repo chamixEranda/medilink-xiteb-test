@@ -642,6 +642,21 @@ a:focus {
   color: #1fab89;
 }
 
+.verfication-input{
+  border: 1px solid #eeee;
+  box-shadow: 0px 2px 9px 0px rgba(163, 162, 162, 0.5);
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+#signup_otp_verify_section input{
+  text-align: center;
+  font-weight: 600;
+  font-size: 15px;
+}
+
 .contact_section .form_container button {
   width: 100%;
   border: none;

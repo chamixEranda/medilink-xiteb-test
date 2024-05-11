@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>MediLink</title>
+    <title>{{ env('APP_NAME','MediLink') }}</title>
+    <link rel="icon" href="{{asset('images/favicon.png')}}" type="image/png">
     <!-- bootstrap core css -->
     <link rel="stylesheet" href="<?php echo asset('css/bootstrap.css') ?>" type="text/css">
     <!-- fonts style -->
