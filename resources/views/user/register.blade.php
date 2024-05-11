@@ -20,7 +20,7 @@
                             </div>
                         </div>
                         <div class="signup-form-section">
-                            <form class="form_email_register" autocomplete="off" id="form_register">
+                            <form class="form_email_register" autocomplete="off" method="POST">
                                 @csrf
                                 <div class="row gy-3 gy-md-4 overflow-hidden">
                                     <div class="col-12 my-2">
@@ -31,12 +31,12 @@
                                     <div class="col-12" id="verify_email_btn">
                                         <div class="d-grid">
                                             <button class="btn bsb-btn-xl email-verify-btn" onclick="verifyEmail()" type="button">
-                                                <img class="btn-preloader" src="{{ asset('images/preloader.gif') }}" style="width: 25px;height:25px;margin-left:auto;margin-right:auto;display:none">Verify Email
+                                                <img class="btn-preloader" src="{{ asset('images/preloader.gif') }}" style="width: 25px;height:25px;margin-left:auto;margin-right:auto;display:none">{{ translate('messages.verify_email') }}
                                             </button>
                                         </div>
                                     </div>
 
-                                    <div class="after_verify_section" style="display: none">
+                                    <div id="after_verify_section" style="display: none">
                                         <div class="col-12 my-2">
                                             <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="name" id="name" required>
@@ -51,19 +51,43 @@
                                         </div>
                                         <div class="col-12 my-2">
                                             <label for="address" class="form-label">Address <span class="text-danger">*</span></label> <br>
-                                            <textarea name="address" class="form-control" id="address" cols="50" rows="5"></textarea>
+                                            <textarea name="address" class="form-control" id="address" cols="50" rows="5" required></textarea>
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid">
-                                                <button class="btn bsb-btn-xl" type="submit">Sign Up Now</button>
+                                                <button class="btn bsb-btn-xl" type="button" onclick="registerWithEmail()">
+                                                    <img class="btn-preloader-register" src="{{ asset('images/preloader.gif') }}" style="width: 25px;height:25px;margin-left:auto;margin-right:auto;display:none">{{ translate('messages.sign_up_now') }}</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row d-flex justify-content-center mt-4">
-                                    <p>Already have an account? <a href="{{ route('login') }}" class="text-success">Log in</a></p>
-                                </div>
+                                
                             </form>
+                            <div id="signup_otp_verify_section" style="display: none">
+                                <div>
+                                    <div class="flex justify-between">
+                                        <h4 class="font-semibold">{{ translate('messages.verify_otp') }}</h4>
+                                    </div>
+                                </div>
+                                <form class="signup_otp_verification_form text-center" method="post" autocomplete="off">
+                                    @csrf
+                                    <input type="hidden" name="email_verifying" value="">
+                                    <div class="digit-group space-evenly" data-group-name="digits" data-autosubmit="false" autocomplete="off">
+                                        <input type="text" required id="digit-1" name="digit_1" data-next="digit-2"  class="verfication-input" />
+                                        <input type="text" required id="digit-2" name="digit_2" data-next="digit-3" data-previous="digit-1" class="verfication-input" />
+                                        <input type="text" required id="digit-3" name="digit_3" data-next="digit-4" data-previous="digit-2" class="verfication-input" />
+                                        <input type="text" required id="digit-4" name="digit_4" data-next="digit-5" data-previous="digit-3"  class="verfication-input" />
+                                    </div>
+                                    <div class="text-center mt-2 mb-3">
+                                        <button class="btn bsb-btn-xl regiter-continue-btn" onclick="signup_otp_verify()" type="button">
+                                            <img class="btn-preloader-email" src="{{ asset('images/preloader.gif') }}" style="width: 25px;height:25px;margin-left:auto;margin-right:auto;display:none">{{ translate('messages.continue') }}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="row d-flex justify-content-center mt-4">
+                                <p>{{ translate('messages.already_have_an_account') }}? <a href="{{ route('login') }}" class="text-success">Log in</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
