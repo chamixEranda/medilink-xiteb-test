@@ -7,5 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Prescription extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'user_id',
+        'images',
+        'delivery_address',
+        'delivery_note',
+        'delivery_time',
+    ];
 }

@@ -20,7 +20,6 @@ return new class extends Migration
             $table->text('delivery_address')->nullable();
             $table->text('delivery_note')->nullable();
             $table->text('delivery_time')->nullable();
-            $table->text('status')->nullable();
             $table->timestamps();
         });
     }

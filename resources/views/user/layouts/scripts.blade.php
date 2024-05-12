@@ -16,7 +16,10 @@
 <script>
 "use strict";
 
-$('.input-images-1').imageUploader();
+$('.input-images-1').imageUploader({
+    maxSize: 2 * 1024 * 1024,
+    maxFiles: 5
+});
 
 var ToastMixin = Swal.mixin({
     toast: true,
@@ -32,6 +35,17 @@ var ToastMixin = Swal.mixin({
         toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
 });
+
+@if ($errors->any())
+    var errorMessages = '';
+    @foreach ($errors->all() as $error)
+    ToastMixin.fire({
+        animation: true,
+        icon: 'warning',
+        title: '{{ $error }}'
+    });
+    @endforeach
+@endif
 
 function getYear() {
     var currentDate = new Date();

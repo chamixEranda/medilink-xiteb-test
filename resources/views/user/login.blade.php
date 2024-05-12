@@ -22,7 +22,7 @@
                         <div class="signup-form-section">
                             <form id="user_login_form" method="POST" autocomplete="off">
                                 @csrf
-                                <div class="row gy-3 gy-md-4 overflow-hidden">
+                                <div class="row gy-3 gy-md-4 overflow-hidden mt-4">
                                     <div class="col-12 my-2">
                                         <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
                                         <input type="email" class="form-control" name="email" id="email" required>
@@ -38,7 +38,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row d-flex justify-content-center mt-4">
+                                <div class="row d-flex justify-content-center mt-5">
                                     <p>New to MediLink? <a href="{{ route('sign-up') }}" class="text-success">{{ translate('messages.sign_up_here') }}</a></p>
                                 </div>
                             </form>

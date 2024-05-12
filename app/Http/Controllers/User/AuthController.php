@@ -189,4 +189,10 @@ class AuthController extends Controller
         }else
             return response()->json(['message' => translate('messages.user_not_found')],401);
     }
+
+    public function logOutUser(Request $request)
+    {
+        Auth::logout();
+        return redirect()->route('login');
+    }
 }

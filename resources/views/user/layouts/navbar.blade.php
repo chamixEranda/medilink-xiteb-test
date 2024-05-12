@@ -30,7 +30,14 @@
                     @endif
                     @if (auth()->check())
                     <li class="nav-item">
-                        <a class="nav-link text-danger font-weight-bold" href="doctors.html">{{translate('messages.log_out')}}</a>
+                        <a class="nav-link" href="{{ route('prescription.index') }}">{{translate('messages.my_quotations')}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger font-weight-bold"
+                         href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{translate('messages.log_out')}}</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </li>
                     @endif
                     
