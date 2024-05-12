@@ -30,7 +30,6 @@
     data-sidebar-position="fixed" data-header-position="fixed">
         @include('pharmacy.layouts.sidebar')
         <div class="body-wrapper">
-            @include('pharmacy.layouts.header')
             @yield('content')
         </div>
     </div>

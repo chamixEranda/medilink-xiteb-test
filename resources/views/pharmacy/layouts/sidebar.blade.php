@@ -30,7 +30,7 @@
           <span class="hide-menu">{{ translate('messages.prescriptions') }}</span>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="" aria-expanded="false">
+          <a class="sidebar-link" href="{{ route('pharmacy.prescription.index') }}" aria-expanded="false">
             <span>
               <i class="ti ti-article"></i>
             </span>
@@ -43,11 +43,22 @@
           <span class="hide-menu">{{ translate('messages.quotations') }}</span>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="" aria-expanded="false">
+          <a class="sidebar-link" href="{{ route('pharmacy.quotation.index') }}" aria-expanded="false">
             <span>
               <i class="fas fa-cogs"></i>
             </span>
             <span class="hide-menu">{{ translate('messages.quotation_list') }}</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{{ route('pharmacy.auth.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" aria-expanded="false">
+            <span>
+              <i class="fas fa-sign-out-alt"></i>
+            </span>
+            <span class="hide-menu">{{ translate('messages.log_out') }}</span>
+            <form id="logout-form" action="{{ route('pharmacy.auth.logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
           </a>
         </li>
       </ul>

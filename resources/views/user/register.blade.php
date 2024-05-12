@@ -7,7 +7,7 @@
             <div class="row g-0">
                 <div class="col-12 col-md-6 text-bg-primary">
                     <div class="d-flex align-items-center justify-content-center h-100">
-                        <img class="img-fluid rounded h-100" style="object-fit: cover;" loading="lazy" src="{{asset('images/signup.jpg')}}" alt="Sign Up">
+                        <img class="img-fluid rounded h-100" style="object-fit: cover;" loading="lazy" src="{{asset('images/login image.svg')}}" alt="Sign Up">
                     </div>
                 </div>
                 <div class="col-12 col-md-6">

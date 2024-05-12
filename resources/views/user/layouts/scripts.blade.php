@@ -36,6 +36,29 @@ var ToastMixin = Swal.mixin({
     }
 });
 
+function route_alert(route, message,title="{{translate('messages.are_you_sure')}}") {
+    Swal.fire({
+        title: title,
+        text: message,
+        type: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: 'default',
+        confirmButtonColor: '#FC6A57',
+        cancelButtonText: '{{ translate('messages.no') }}',
+        confirmButtonText: '{{ translate('messages.Yes') }}',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.value) {
+            if (message == 'Change status to processing  ') {
+                $('#add-process-time').modal('show');
+            }else{
+                location.href = route;
+            }
+            
+        }
+    })
+}
+
 @if ($errors->any())
     var errorMessages = '';
     @foreach ($errors->all() as $error)

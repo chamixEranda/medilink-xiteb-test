@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\PrescriptionService;
+use App\Services\QuotationService;
 use Illuminate\Support\Facades\DB;
 use App\Http\CentralLogics\Helpers;
 
@@ -17,15 +18,28 @@ class PrescriptionController extends Controller
      */
 
     protected $prescriptionService;
+    protected $quotationService;
 
-    public function __construct(PrescriptionService $prescriptionService) {
+    public function __construct(PrescriptionService $prescriptionService, QuotationService $quotationService) {
+        // Injecting the PrescriptionService and QuotationService instance into the controller.
         $this->prescriptionService = $prescriptionService;
+        $this->quotationService = $quotationService;
     }
 
     public function index()
     {
-        $lims_prescription_list = $this->prescriptionService->getPrescriptionWithPaginateByUser(auth()->user()->id);
-        return view('user.quotation-list', compact('lims_prescription_list'));
+        // get quotations of authenticated user by calling service
+        $lims_quotation_list = $this->quotationService->getQuotationWithPaginateByUser(auth()->user()->id);
+        return view('user.quotation-list', compact('lims_quotation_list'));
+    }
+
+    public function status(Request $request)
+    {
+        // get quotations data by id
+        $lims_quotation_data = $this->quotationService->getQuotationByID($request->id);
+        $lims_quotation_data->update(['status' => $request->status]);
+
+        return redirect()->back();
     }
 
     /**
@@ -61,12 +75,12 @@ class PrescriptionController extends Controller
             // Handle each image upload here
             $imageName = $image->getClientOriginalName();
             $extension = strtolower($image->getClientOriginalExtension());
-            $images[] = Helpers::upload('prescription/'.$logged_user, $extension, $image);
+            $images[] = Helpers::upload('prescription/', $extension, $image);
         }
 
         $data = $request->all();
         $data['user_id'] = $logged_user;
-        $data['images'] = json_encode($images);
+        $data['images'] = json_encode($images);// store images list as json
 
         $this->prescriptionService->createPrescription($data);
 

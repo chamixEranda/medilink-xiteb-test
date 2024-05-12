@@ -30,4 +30,5 @@ Route::post('/login/check', [AuthController::class, 'loginCheck'])->name('login.
 Route::group(['middleware' => 'auth'], function(){
     Route::resource('prescription', PrescriptionController::class);
     Route::post('/logout', [AuthController::class, 'logOutUser'])->name('logout');
+    Route::get('/quotation/status', [PrescriptionController::class, 'status'])->name('quotation.status');
 });

@@ -19,6 +19,7 @@ class AuthController extends Controller
     protected $userService;
 
     public function __construct(UserService $userService) {
+        // Injecting the UserService instance into the controller.
         $this->userService = $userService;
     }
 
@@ -51,6 +52,7 @@ class AuthController extends Controller
 
         $otpData = EmailVerification::where('email', $request['email'])->first();
 
+        //update email_verification if otpData exists , otherwise insert token with email to the table
         if ($otpData) {
             DB::table('email_verifications')
                 ->where('email', $request['email'])
@@ -64,7 +66,14 @@ class AuthController extends Controller
             ]);
         }
 
-        Mail::to($request['email'])->send(new EmailVerificationMail($token));
+        // email verification email send
+        try {
+            Mail::to($request['email'])->send(new EmailVerificationMail($token));
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ],500);
+        }
 
         return response()->json([
             'message' => 'We have sent the OTP to your email',
@@ -73,6 +82,7 @@ class AuthController extends Controller
 
     public function verifySignupEmailOtp(Request $request)
     {
+        // validate token inputs
         $validator = Validator::make($request->all(), [
             'email_verifying' => 'required',
             'digit_1' => 'required',
@@ -90,6 +100,7 @@ class AuthController extends Controller
         }
 
         $data = $request->all();
+        // implode the seperate digits into one
         $otp = $data['digit_1'] . $data['digit_2'] . $data['digit_3'] . $data['digit_4'];
 
         /* check otp */
@@ -138,6 +149,7 @@ class AuthController extends Controller
             ],400);
         }
 
+        // get user data by email & if user exisiting return warning message
         $userEmail = $this->userService->getUserByEmail($request['email']);
         if (isset($userEmail)) 
         {
@@ -148,6 +160,7 @@ class AuthController extends Controller
 
         DB::beginTransaction();
 
+        // create user data
         $data = $request->all();
         $data['password'] = bcrypt($request->password);
         $data['contact'] = $request->contact_no;
@@ -156,6 +169,7 @@ class AuthController extends Controller
 
         DB::commit();
 
+        // user authentication
         if(Auth::loginUsingId($user->id)){
             return response()->json([
                 'message' => "Registration successfull"
@@ -166,6 +180,7 @@ class AuthController extends Controller
 
     public function loginCheck(Request $request)
     {
+        //validate login credentials
         $validator = Validator::make($request->all(), [
             'email'     => 'required|email|exists:users,email',
             'password'  => 'required|min:8|max:20',
@@ -177,6 +192,7 @@ class AuthController extends Controller
             ],400);
         }
 
+        // get user details by email and if exists authenticate the user, otherwise warning returns
         $user = $this->userService->getUserByEmail($request['email']);
         if ($user) {
             $creds = $request->only('email','password');
@@ -190,6 +206,7 @@ class AuthController extends Controller
             return response()->json(['message' => translate('messages.user_not_found')],401);
     }
 
+    //logout
     public function logOutUser(Request $request)
     {
         Auth::logout();
