@@ -30,7 +30,7 @@
           <span class="hide-menu">{{ translate('messages.prescriptions') }}</span>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="" aria-expanded="false">
+          <a class="sidebar-link" href="{{ route('pharmacy.prescription.index') }}" aria-expanded="false">
             <span>
               <i class="ti ti-article"></i>
             </span>
@@ -43,7 +43,7 @@
           <span class="hide-menu">{{ translate('messages.quotations') }}</span>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="" aria-expanded="false">
+          <a class="sidebar-link" href="{{ route('pharmacy.quotation.index') }}" aria-expanded="false">
             <span>
               <i class="fas fa-cogs"></i>
             </span>
