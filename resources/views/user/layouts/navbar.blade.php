@@ -18,10 +18,10 @@
                         <a class="nav-link" href="{{ route('home') }}">{{translate('messages.home')}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about_us_Section">{{translate('messages.about')}}</a>
+                        <a class="nav-link" href="{{ route('home') }}#about_us_Section">{{translate('messages.about')}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contactus_Section">{{translate('messages.contact_us')}}</a>
+                        <a class="nav-link" href="{{ route('home') }}#contactus_Section">{{translate('messages.contact_us')}}</a>
                     </li>
                     @if (!auth()->check())
                     <li class="nav-item">
@@ -41,7 +41,7 @@
                     </li>
                     @endif
                     <li class="nav-item">
-                        <a class="nav-link text-dark font-weight-bold" href="{{ route('pharmacy.auth.login') }}">{{translate('messages.phramacy_login')}}</a>
+                        <a class="nav-link text-dark font-weight-bold" target="_blank" href="{{ route('pharmacy.auth.login') }}">{{translate('messages.phramacy_login')}}</a>
                     </li>
                 </ul>
             </div>

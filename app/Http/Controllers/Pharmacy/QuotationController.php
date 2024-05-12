@@ -89,7 +89,11 @@ class QuotationController extends Controller
 
         DB::commit();
 
-        Mail::to($prescription_data->user->email)->send(new QuotationMail($quotation));
+        // try {
+            Mail::to($prescription_data->user->email)->send(new QuotationMail($quotation));
+        // } catch (\Exception $e) {
+            // return redirect()->back()->with('error', $e->getMessage());
+        // }
 
         return redirect()->route('pharmacy.quotation.index');
     }

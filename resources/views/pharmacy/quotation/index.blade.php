@@ -6,9 +6,6 @@
     <!-- Page Header -->
     <div class="page-header">
         <h1 class="page-header-title">
-            <span class="page-header-icon">
-                <img src="{{ asset('assets/img/user.jpg') }}" class="w--26" alt="">
-            </span>
             <span>
                 {{ translate('messages.quotations') }}
             </span>

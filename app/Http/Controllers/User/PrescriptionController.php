@@ -73,7 +73,7 @@ class PrescriptionController extends Controller
             // Handle each image upload here
             $imageName = $image->getClientOriginalName();
             $extension = strtolower($image->getClientOriginalExtension());
-            $images[] = Helpers::upload('prescription/'.$logged_user, $extension, $image);
+            $images[] = Helpers::upload('prescription/', $extension, $image);
         }
 
         $data = $request->all();

@@ -64,7 +64,13 @@ class AuthController extends Controller
             ]);
         }
 
-        Mail::to($request['email'])->send(new EmailVerificationMail($token));
+        try {
+            Mail::to($request['email'])->send(new EmailVerificationMail($token));
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ],500);
+        }
 
         return response()->json([
             'message' => 'We have sent the OTP to your email',
