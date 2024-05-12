@@ -12,8 +12,14 @@
 <!-- custom js -->
 <script type="text/javascript" src="<?php echo asset('js/custom.js') ?>"></script>
 <script type="text/javascript" src="<?php echo asset('js/sweetalert2@11.js') ?>"></script>
+<script type="text/javascript" src="<?php echo asset('js/image-uploader.min.js') ?>"></script>
 <script>
 "use strict";
+
+$('.input-images-1').imageUploader({
+    maxSize: 2 * 1024 * 1024,
+    maxFiles: 5
+});
 
 var ToastMixin = Swal.mixin({
     toast: true,
@@ -29,6 +35,17 @@ var ToastMixin = Swal.mixin({
         toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
 });
+
+@if ($errors->any())
+    var errorMessages = '';
+    @foreach ($errors->all() as $error)
+    ToastMixin.fire({
+        animation: true,
+        icon: 'warning',
+        title: '{{ $error }}'
+    });
+    @endforeach
+@endif
 
 function getYear() {
     var currentDate = new Date();
@@ -402,5 +419,7 @@ $('#user_login_form').on('submit', function(e){
         }
     })
 });
+
+
 
 </script>

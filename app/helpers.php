@@ -32,3 +32,11 @@ if (! function_exists('translate')) {
         return $result;
     }
 }
+
+if (!function_exists('getPrescriptionImagePath')) {
+    function getPrescriptionImagePath($imageName){
+        $logged_user = auth()->user()->id;
+        $path = 'storage/prescription/'.$logged_user.'/'.$imageName;
+        return $path;
+    }
+}

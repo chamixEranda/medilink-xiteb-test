@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\AuthController;
+use App\Http\Controllers\User\PrescriptionController;
 
 
 /*
@@ -24,5 +25,8 @@ Route::post('/signup/verify-email', [AuthController::class, 'verifySignupEmail']
 Route::post('/signup/verify-email-otp', [AuthController::class, 'verifySignupEmailOtp'])->name('sign-up.verify-email-otp');
 Route::post('/signup/store', [AuthController::class, 'registerStore'])->name('sign-up.store');
 
+Route::post('/logout', [AuthController::class, 'logOutUser'])->name('logout');
+
 Route::post('/login/check', [AuthController::class, 'loginCheck'])->name('login.check');
 
+Route::resource('prescription', PrescriptionController::class);

@@ -15,4 +15,12 @@
   'invalid_credentials' => 'Invalid credentials',
   'you_are_logged_in' => 'You are logged in',
   'log_out' => 'Log out',
+  'request_a_quotation' => 'Request a Quotation',
+  'Prescription Image' => 'Prescription Image',
+  'ratio' => 'Ratio',
+  'message.send' => 'Message.send',
+  'send' => 'Send',
+  'my_quotations' => 'My quotations',
+  'My_Quotations' => 'My Quotations',
+  'My_Prescriptions' => 'My Prescriptions',
 );

@@ -61,19 +61,16 @@
               Links
             </h4>
             <div class="footer_links">
-              <a class="active" href="index.html">
+              <a class="active" href="{{ route('home') }}">
                 Home
               </a>
-              <a class="" href="about.html">
+              <a class="" href="#about_us_Section">
                 About
               </a>
-              <a class="" href="departments.html">
-                Departments
+              <a class="" href="#quotation_Section">
+                Request Quotation
               </a>
-              <a class="" href="doctors.html">
-                Doctors
-              </a>
-              <a class="" href="contact.html">
+              <a class="" href="#contactus_Section">
                 Contact Us
               </a>
             </div>

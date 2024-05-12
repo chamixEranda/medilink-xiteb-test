@@ -354,6 +354,17 @@ a:focus {
   height: 20px;
 }
 
+.input-field {
+  position: relative;
+  margin-top: 2.2rem;
+}
+.input-field label.active {
+  -webkit-transform: translateY(-15px) scale(0.8);
+  transform: translateY(-15px) scale(0.8);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+}
+
 .department_section {
   position: relative;
 }

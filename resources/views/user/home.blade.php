@@ -2,6 +2,56 @@
 
 @section('content')
 
+<!-- prescription section -->
+<section class="layout_margin-top layout_margin-bottom contact_section {{ auth()->check() ? '' : 'd-none' }}" id="quotation_Section">
+  <div class="container">
+    <div class="card border-light-subtle shadow-sm">
+      <h2 class="card-title py-2 px-4 font-weight-bold">{{ translate('messages.request_a_quotation') }}</h2>
+      <div class="card-body">
+        <form action="{{ route('prescription.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+          @csrf
+          <div class="col-lg-12 form_container">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="input-field">
+                  <label class="active">Photos <span class="text-danger">* 5 images only(Max 2MB each)</span></label>
+                  <div class="input-images-1" style="padding-top: .5rem;"></div>
+              </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group row my-2">
+                  <label for="deliveryAddress" class="col-sm-4 col-form-label">Delivery Address <span class="text-danger">*</span></label>
+                  <div class="col-sm-8">
+                    <textarea name="delivery_address" class="form-control" id="deliveryAddress" cols="50" rows="5" required></textarea>
+                  </div>
+                </div>
+                <div class="form-group row my-2">
+                  <label for="deliverynote" class="col-sm-4 col-form-label">Note </label>
+                  <div class="col-sm-8">
+                    <textarea name="delivery_note" class="form-control" id="deliverynote" cols="50" rows="5"></textarea>
+                  </div>
+                </div>
+                <div class="form-group row my-2">
+                  <label for="deliveryTime" class="col-sm-4 col-form-label">Delivery Time <span class="text-danger">*</span></label>
+                  <div class="col-sm-8">
+                    <select id="deliveryTime" name="delivery_time" class="form-control">
+                      @foreach ($timeSlots as $time)
+                        <option value="{{ $time }}">{{ $time }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+                <button class="btn mt-3" type="submit"><i class="fas fa-paper-plane"></i> {{ translate('messages.send') }}</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end prescription section -->
+
 <!-- about section -->
 <section class="about_section layout_margin-bottom" id="about_us_Section">
     <div class="container">
@@ -41,7 +91,7 @@
 <!-- end about section -->
 
 <!-- contact section -->
-<section class="contact_section layout_padding">
+<section class="contact_section layout_padding" id="contactus_Section">
   <div class="container">
     <div class="heading_container">
       <h2>
