@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\PrescriptionService;
 use Illuminate\Support\Facades\DB;
+use App\Http\CentralLogics\Helpers;
 
 class PrescriptionController extends Controller
 {
@@ -59,8 +60,9 @@ class PrescriptionController extends Controller
         foreach ($request->file('images') as $image) {
             // Handle each image upload here
             $imageName = $image->getClientOriginalName();
-            $image->storeAs('prescription/'.$logged_user, $imageName);
-            $images[] = $imageName;
+            $extension = strtolower($image->getClientOriginalExtension());
+            // $image->storeAs('prescription/'.$logged_user, $imageName);
+            $images[] = Helpers::upload('prescription/'.$logged_user, $extension, $image);
         }
 
         $data = $request->all();

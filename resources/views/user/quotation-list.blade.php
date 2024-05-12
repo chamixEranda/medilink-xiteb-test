@@ -13,9 +13,9 @@
         @foreach ($lims_prescription_list as $prescription)
         <div class="col-sm-6 col-lg-4 mx-auto">
           <div class="box">
-            <div class="img-box">
+            <div class="img-box d-flex">
               @foreach (json_decode($prescription->images) as $image)
-              <img src="{{ asset(getPrescriptionImagePath($image)) }}" alt="">
+              <img src="{{ asset(getPrescriptionImagePath($image)) }}" style="object-fit: cover;width:150px;height:150px" alt="">
               @endforeach
             </div>
             <div class="detail-box">
