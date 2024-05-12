@@ -21,6 +21,7 @@ Route::group(['namespace' => 'Pharmacy', 'as' => 'pharmacy.'], function() {
         Route::get('prescription/show-data', [PrescriptionController::class, 'show'])->name('prescription.show-data');
         Route::resource('prescription', PrescriptionController::class);
 
+        Route::get('quotation/create/{prescription_id}', [QuotationController::class, 'create'])->name('quotation.create');
         Route::resource('quotation', QuotationController::class);
     });
 });

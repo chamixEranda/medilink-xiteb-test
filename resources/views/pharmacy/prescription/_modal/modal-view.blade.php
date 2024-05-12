@@ -7,7 +7,7 @@
         <div class="box">
             <div class="img-box ">
               @foreach (json_decode($lims_prescription_data->images) as $image)
-              <img src="{{ asset(getPrescriptionImagePath($image)) }}" style="object-fit: cover;width:150px;height:150px" alt="">
+              <a href="{{ asset(getPrescriptionImagePath($image)) }}" download><img src="{{ asset(getPrescriptionImagePath($image)) }}" style="object-fit: cover;width:150px;height:150px" alt=""></a>
               @endforeach
             </div>
             <div class="detail-box mt-3">

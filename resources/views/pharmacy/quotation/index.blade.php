@@ -10,7 +10,7 @@
                 <img src="{{ asset('assets/img/user.jpg') }}" class="w--26" alt="">
             </span>
             <span>
-                {{ translate('messages.prescriptions') }}
+                {{ translate('messages.quotations') }}
             </span>
         </h1>
     </div>
@@ -19,7 +19,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <h5 class="card-title fw-semibold mb-4">{{ translate('messages.prescription_list') }}</h5>
+                    <h5 class="card-title fw-semibold mb-4">{{ translate('messages.quotation_list') }}</h5>
                 </div>
             </div>
         </div>
@@ -28,35 +28,28 @@
                 <thead>
                     <tr>
                         <th class="not-exported"></th>
+                        <th class="border-0">{{ translate('messages.quotation_no') }}</th>
+                        <th class="border-0">{{ translate('messages.prescription') }}</th>
                         <th class="border-0">{{ translate('messages.user') }}</th>
-                        <th class="border-0">{{ translate('messages.delivery_address') }}</th>
-                        <th class="border-0">{{translate('messages.delivery_time')}}</th>
-                        <th class="border-0">{{translate('messages.note')}}</th>
-                        <th class="border-0 not-exported">{{translate('messages.action')}}</th>
+                        <th class="border-0">{{translate('messages.details')}}</th>
+                        <th class="border-0">{{translate('messages.total_cost')}}</th>
+                        <th class="border-0">{{translate('messages.status')}}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($lims_prescription_list as $key=> $prescription)
+                    @foreach ($lims_quotation_list as $key=> $quotation)
                     <tr>
                         <td>{{ $key }}</td>
-                        <td>{{ $prescription->user->name.' - '.$prescription->user->email }}</td>
-                        <td>{{ $prescription->delivery_address }}</td>
-                        <td>{{ $prescription->delivery_time }}</td>
-                        <td>{{ $prescription->delivery_note }}</td>
+                        <td>{{ $quotation->id }}</td>
+                        <td>{{ $quotation->prescription->id }}</td>
+                        <td>{{ $quotation->user->name }}</td>
                         <td>
-                            <div class="btn--container justify-content-center">
-                                <a class="btn action-btn btn--primary btn-outline-primary"
-                                    href="javascript:" onclick="viewPrescription({{ $prescription['id'] }})"
-                                    title="{{translate('messages.view')}} {{translate('messages.prescription')}}"><i
-                                        class="fas fa-eye"></i>
-                                </a>
-                                <a class="btn action-btn btn--primary btn-outline-primary"
-                                    href="{{ route('pharmacy.quotation.create', ['prescription_id' => $prescription->id]) }}"
-                                    title="{{translate('messages.make')}} {{translate('messages.quotation')}}"><i
-                                        class="fas fa-pen"></i>
-                                </a>
-                            </div>
+                            @foreach ($quotation->details as $item)
+                                {!! $item->drug_name .' - '. $item->net_unit_cost .' x '. $item->qty .'</br>' !!}
+                            @endforeach
                         </td>
+                        <td>{{ number_format($quotation->total_cost,2) }}</td>
+                        <td>{{ $quotation->status }}</td>
                     </tr>
                     @endforeach
                 </tbody>
