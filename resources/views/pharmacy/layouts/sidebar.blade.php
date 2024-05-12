@@ -4,7 +4,7 @@
   <div>
     <div class="brand-logo ">
       <a href="" class="text-nowrap logo-img">
-        <img src="{{ asset('images/favicon.png') }}" width="100" class="d-block mx-auto" alt="" />
+        <img src="{{ asset('images/favicon.png') }}" width="50" class="d-block mx-auto pt-2" alt="" />
       </a>
       <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
         <i class="ti ti-x fs-8"></i>
@@ -18,7 +18,7 @@
           <span class="hide-menu">Home</span>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="" aria-expanded="false">
+          <a class="sidebar-link" href="{{ route('pharmacy.dashboard') }}" aria-expanded="false">
             <span>
               <i class="ti ti-layout-dashboard"></i>
             </span>

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{translate('messages.admin')}} | {{translate('messages.login')}}</title>
+  <title>{{translate('messages.pharmacy')}} | {{translate('messages.login')}}</title>
   <link rel="shortcut icon" type="image/png" href="{{ asset('imgages/favicon.png') }}" />
   <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}">
   <link rel="stylesheet" href="{{asset('assets/css/theme.minc619.css?v=1.0')}}">

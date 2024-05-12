@@ -29,4 +29,13 @@
   'password' => 'Password',
   'remember_me' => 'Remember me',
   'sign_in' => 'Sign in',
+  'pharmacy' => 'Pharmacy',
+  'dashboard' => 'Dashboard',
+  'prescriptions' => 'Prescriptions',
+  'prescription_list' => 'Prescription list',
+  'quotations' => 'Quotations',
+  'quotation_list' => 'Quotation list',
+  'Are you sure?' => 'Are you sure ',
+  'no' => 'No',
+  'Yes' => 'Yes',
 );
