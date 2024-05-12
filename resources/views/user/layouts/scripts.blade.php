@@ -13,13 +13,27 @@
 <script type="text/javascript" src="<?php echo asset('js/custom.js') ?>"></script>
 <script type="text/javascript" src="<?php echo asset('js/sweetalert2@11.js') ?>"></script>
 <script type="text/javascript" src="<?php echo asset('js/image-uploader.min.js') ?>"></script>
-<script src="{{asset('assets/js/sweet_alert.js')}}"></script>
 <script>
 "use strict";
 
 $('.input-images-1').imageUploader({
     maxSize: 2 * 1024 * 1024,
     maxFiles: 5
+});
+
+var ToastMixin = Swal.mixin({
+    toast: true,
+    icon: 'success',
+    title: '',
+    animation: false,
+    position: 'top-right',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
 });
 
 function route_alert(route, message,title="{{translate('messages.are_you_sure')}}") {
@@ -44,22 +58,6 @@ function route_alert(route, message,title="{{translate('messages.are_you_sure')}
         }
     })
 }
-
-
-var ToastMixin = Swal.mixin({
-    toast: true,
-    icon: 'success',
-    title: '',
-    animation: false,
-    position: 'top-right',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-});
 
 @if ($errors->any())
     var errorMessages = '';
