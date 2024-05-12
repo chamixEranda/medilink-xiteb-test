@@ -18,9 +18,9 @@ class EmailVerificationMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(private string $token)
     {
-        //
+        $this->token = $token;
     }
 
     /**
@@ -44,6 +44,7 @@ class EmailVerificationMail extends Mailable
     {
         return new Content(
             view: 'mail.email-verification',
+            with: ['token' => $this->token]
         );
     }
 
