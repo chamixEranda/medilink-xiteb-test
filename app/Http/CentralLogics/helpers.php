@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\CentralLogics;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Carbon;
 
 class Helpers
 {
@@ -24,5 +26,20 @@ class Helpers
     public static function remove_invalid_charcaters($str)
     {
         return str_ireplace(['\'', '"', ',', ';', '<', '>', '?'], ' ', $str);
+    }
+
+    public static function upload(string $dir, string $format, $image = null)
+    {
+        if ($image != null) {
+            $imageName = \Carbon\Carbon::now()->toDateString() . "-" . uniqid() . "." . $format;
+            if (!Storage::disk('public')->exists($dir)) {
+                Storage::disk('public')->makeDirectory($dir);
+            }
+            Storage::disk('public')->putFileAs($dir, $image, $imageName);
+        } else {
+            $imageName = 'def.png';
+        }
+
+        return $imageName;
     }
 }
