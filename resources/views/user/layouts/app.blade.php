@@ -19,6 +19,7 @@
     <link href="<?php echo asset('css/style.css') ?>" rel="stylesheet" />
     <!-- responsive style -->
     <link href="<?php echo asset('css/responsive.css')?>" rel="stylesheet" />
+    <link href="<?php echo asset('css/image-uploader.min.css')?>" rel="stylesheet" />
 </head>
 <body class="{{ !Route::is('home') ? 'sub_page' : '' }}">
     @include('user.layouts.header')

@@ -21,7 +21,7 @@
                         <a class="nav-link" href="#about_us_Section">{{translate('messages.about')}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">{{translate('messages.contact_us')}}</a>
+                        <a class="nav-link" href="#contactus_Section">{{translate('messages.contact_us')}}</a>
                     </li>
                     @if (!auth()->check())
                     <li class="nav-item">

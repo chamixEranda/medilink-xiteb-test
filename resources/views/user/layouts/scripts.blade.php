@@ -12,8 +12,11 @@
 <!-- custom js -->
 <script type="text/javascript" src="<?php echo asset('js/custom.js') ?>"></script>
 <script type="text/javascript" src="<?php echo asset('js/sweetalert2@11.js') ?>"></script>
+<script type="text/javascript" src="<?php echo asset('js/image-uploader.min.js') ?>"></script>
 <script>
 "use strict";
+
+$('.input-images-1').imageUploader();
 
 var ToastMixin = Swal.mixin({
     toast: true,
@@ -402,5 +405,7 @@ $('#user_login_form').on('submit', function(e){
         }
     })
 });
+
+
 
 </script>

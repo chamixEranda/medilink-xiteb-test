@@ -1,6 +1,65 @@
 @extends('user.layouts.app')
 
 @section('content')
+<style>
+  .input-field {
+      position: relative;
+      margin-top: 2.2rem;
+  }
+  .input-field label.active {
+      -webkit-transform: translateY(-15px) scale(0.8);
+      transform: translateY(-15px) scale(0.8);
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+  }
+</style>
+<!-- prescription section -->
+<section class="layout_margin-top layout_margin-bottom contact_section" id="quotation_Section">
+  <div class="container">
+    <div class="card border-light-subtle shadow-sm">
+      <div class="card-header">
+        <h2 class="card-title">{{ translate('messages.request_a_quotation') }}</h2>
+      </div>
+      <div class="card-body">
+        <div class="col-lg-12 form_container">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="input-field">
+                <label class="active">Photos</label>
+                <div class="input-images-1" style="padding-top: .5rem;"></div>
+            </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group row my-2">
+                <label for="deliveryAddress" class="col-sm-4 col-form-label">Delivery Address</label>
+                <div class="col-sm-8">
+                  <textarea name="delivery_address" class="form-control" id="deliveryAddress" cols="50" rows="5"></textarea>
+                </div>
+              </div>
+              <div class="form-group row my-2">
+                <label for="deliverynote" class="col-sm-4 col-form-label">Note</label>
+                <div class="col-sm-8">
+                  <textarea name="delivery_note" class="form-control" id="deliverynote" cols="50" rows="5"></textarea>
+                </div>
+              </div>
+              <div class="form-group row my-2">
+                <label for="deliveryTime" class="col-sm-4 col-form-label">Delivery Time</label>
+                <div class="col-sm-8">
+                  <select id="deliveryTime" class="form-control">
+                    @foreach ($timeSlots as $time)
+                      <option value="{{ $time }}">{{ $time }}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end prescription section -->
 
 <!-- about section -->
 <section class="about_section layout_margin-bottom" id="about_us_Section">
@@ -41,7 +100,7 @@
 <!-- end about section -->
 
 <!-- contact section -->
-<section class="contact_section layout_padding">
+<section class="contact_section layout_padding" id="contactus_Section">
   <div class="container">
     <div class="heading_container">
       <h2>
