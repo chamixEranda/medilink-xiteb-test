@@ -13,6 +13,7 @@
 <script type="text/javascript" src="<?php echo asset('js/custom.js') ?>"></script>
 <script type="text/javascript" src="<?php echo asset('js/sweetalert2@11.js') ?>"></script>
 <script type="text/javascript" src="<?php echo asset('js/image-uploader.min.js') ?>"></script>
+<script src="{{asset('assets/js/sweet_alert.js')}}"></script>
 <script>
 "use strict";
 
@@ -20,6 +21,30 @@ $('.input-images-1').imageUploader({
     maxSize: 2 * 1024 * 1024,
     maxFiles: 5
 });
+
+function route_alert(route, message,title="{{translate('messages.are_you_sure')}}") {
+    Swal.fire({
+        title: title,
+        text: message,
+        type: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: 'default',
+        confirmButtonColor: '#FC6A57',
+        cancelButtonText: '{{ translate('messages.no') }}',
+        confirmButtonText: '{{ translate('messages.Yes') }}',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.value) {
+            if (message == 'Change status to processing  ') {
+                $('#add-process-time').modal('show');
+            }else{
+                location.href = route;
+            }
+            
+        }
+    })
+}
+
 
 var ToastMixin = Swal.mixin({
     toast: true,

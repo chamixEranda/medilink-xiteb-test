@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\PrescriptionService;
+use App\Services\QuotationService;
 use Illuminate\Support\Facades\DB;
 use App\Http\CentralLogics\Helpers;
 
@@ -17,15 +18,26 @@ class PrescriptionController extends Controller
      */
 
     protected $prescriptionService;
+    protected $quotationService;
 
-    public function __construct(PrescriptionService $prescriptionService) {
+    public function __construct(PrescriptionService $prescriptionService, QuotationService $quotationService) {
         $this->prescriptionService = $prescriptionService;
+        $this->quotationService = $quotationService;
     }
 
     public function index()
     {
-        $lims_prescription_list = $this->prescriptionService->getPrescriptionWithPaginateByUser(auth()->user()->id);
-        return view('user.quotation-list', compact('lims_prescription_list'));
+        $lims_quotation_list = $this->quotationService->getQuotationWithPaginateByUser(auth()->user()->id);
+        return view('user.quotation-list', compact('lims_quotation_list'));
+    }
+
+    public function status(Request $request)
+    {
+        // dd($request);
+        $lims_quotation_data = $this->quotationService->getQuotationByID($request->id);
+        $lims_quotation_data->update(['status' => $request->status]);
+
+        return redirect()->back();
     }
 
     /**

@@ -69,4 +69,13 @@
   'details' => 'Details',
   'total_cost' => 'Total cost',
   'status' => 'Status',
+  'Quotation' => 'Quotation',
+  'pending' => 'Pending',
+  'Change status to confirm ?' => 'Change status to confirm  ',
+  'confirmed' => 'Confirmed',
+  'confirm' => 'Confirm',
+  'are_you_sure' => 'Are you sure',
+  'Change status to reject ?' => 'Change status to reject  ',
+  'reject' => 'Reject',
+  'rejected' => 'Rejected',
 );
