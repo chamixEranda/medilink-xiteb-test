@@ -19,11 +19,13 @@ class PrescriptionController extends Controller
     protected $prescriptionService;
 
     public function __construct(PrescriptionService $prescriptionService) {
+        // Injecting the PrescriptionService instance into the controller.
         $this->prescriptionService = $prescriptionService;
     }
 
     public function index()
     {
+        //get all the prescription list
         $lims_prescription_list = $this->prescriptionService->getAllPrescription();
 
         return view('pharmacy.prescription.index',compact('lims_prescription_list'));
@@ -58,6 +60,7 @@ class PrescriptionController extends Controller
      */
     public function show(Request $request)
     {
+        //get the prescription data by its id
         $lims_prescription_data = $this->prescriptionService->getPrescriptionByID($request->query('id'));
 
         return response()->json([

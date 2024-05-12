@@ -24,12 +24,14 @@ class QuotationController extends Controller
     protected $quotationService;
 
     public function __construct(PrescriptionService $prescriptionService, QuotationService $quotationService) {
+        // Injecting the PrescriptionService and QuotationService instance into the controller.
         $this->prescriptionService = $prescriptionService;
         $this->quotationService = $quotationService;
     }
 
     public function index()
     {
+        //get total quotation with paginate
         $lims_quotation_list = $this->quotationService->getQuotationWithPaginate();
 
         return view('pharmacy.quotation.index', compact('lims_quotation_list'));
@@ -42,6 +44,7 @@ class QuotationController extends Controller
      */
     public function create(Request $request)
     {
+        //get prescription data by its id
         $lims_prescription_data = $this->prescriptionService->getPrescriptionByID($request->query('prescription_id'));
         return view('pharmacy.quotation.create', compact('lims_prescription_data'));
     }
@@ -70,12 +73,14 @@ class QuotationController extends Controller
             $order_id = Quotation::orderBy('id', 'DESC')->first()->id + 1;
         }
 
+        //get prescription data by its id
         $prescription_data = $this->prescriptionService->getPrescriptionByID($data['prescription_id']);
 
         $data['id'] = $order_id;
         $data['prescription_id'] = $prescription_data->id;
         $data['user_id'] = $prescription_data->user_id;
         $data['status'] = 'pending';
+        //store quotations table data
         $quotation = $this->quotationService->createQuotation($data);
 
         foreach ($data['drug_name'] as $key => $drug) {
@@ -84,16 +89,18 @@ class QuotationController extends Controller
             $detail_data['net_unit_cost'] = $data['net_unit_cost'][$key];
             $detail_data['qty'] = $data['qty'][$key];
             $detail_data['total'] = $data['total'][$key];
+            //store quotation details table data
             $quotationDetails = $this->quotationService->createQuotationDetail($detail_data);
         }
 
         DB::commit();
 
-        // try {
+        //send quotation email
+        try {
             Mail::to($prescription_data->user->email)->send(new QuotationMail($quotation));
-        // } catch (\Exception $e) {
-            // return redirect()->back()->with('error', $e->getMessage());
-        // }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
 
         return redirect()->route('pharmacy.quotation.index');
     }
