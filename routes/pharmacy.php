@@ -11,7 +11,7 @@ Route::group(['namespace' => 'Pharmacy', 'as' => 'pharmacy.'], function() {
     Route::group(['namespace' => 'Auth', 'prefix' => 'auth', 'as' => 'auth.'], function () {
         Route::get('/login', [AuthController::class, 'login'])->name('login');
         Route::post('/submit', [AuthController::class, 'submit'])->name('submit');
-        Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     });
     /*authentication*/
 

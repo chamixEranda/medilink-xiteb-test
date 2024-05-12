@@ -50,6 +50,17 @@
             <span class="hide-menu">{{ translate('messages.quotation_list') }}</span>
           </a>
         </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{{ route('pharmacy.auth.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" aria-expanded="false">
+            <span>
+              <i class="fas fa-sign-out-alt"></i>
+            </span>
+            <span class="hide-menu">{{ translate('messages.log_out') }}</span>
+            <form id="logout-form" action="{{ route('pharmacy.auth.logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+          </a>
+        </li>
       </ul>
     </nav>
     <!-- End Sidebar navigation -->
