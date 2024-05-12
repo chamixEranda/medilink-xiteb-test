@@ -40,7 +40,9 @@
                         </form>
                     </li>
                     @endif
-                    
+                    <li class="nav-item">
+                        <a class="nav-link text-dark font-weight-bold" target="_blank" href="{{ route('pharmacy.auth.login') }}">{{translate('messages.phramacy_login')}}</a>
+                    </li>
                 </ul>
             </div>
         </nav>

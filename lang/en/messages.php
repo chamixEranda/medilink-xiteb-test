@@ -23,4 +23,10 @@
   'my_quotations' => 'My quotations',
   'My_Quotations' => 'My Quotations',
   'My_Prescriptions' => 'My Prescriptions',
+  'phramacy_login' => 'Phramacy login',
+  'admin' => 'Admin',
+  'email' => 'Email',
+  'password' => 'Password',
+  'remember_me' => 'Remember me',
+  'sign_in' => 'Sign in',
 );
